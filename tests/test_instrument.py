@@ -10,3 +10,6 @@ class InstrumentTestCase(unittest.TestCase):
 
 		with self.assertRaises(NotImplementedError):
 			examinee.identity()
+
+		with self.assertRaises(NotImplementedError):
+			examinee.reset()

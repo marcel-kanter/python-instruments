@@ -4,3 +4,6 @@ class Instrument(object):
 
 	def identity(self):
 		raise NotImplementedError()
+
+	def reset(self):
+		raise NotImplementedError()
