@@ -1,10 +1,18 @@
 from ..oscilloscope import Oscilloscope
+from .tektronixdpo7000channel import TektronixDPO7000Channel
 
 
 class TektronixDPO7000(Oscilloscope):
-	def __init__(self):
+	def __init__(self, channel_count):
+		if int(channel_count) <= 0:
+			raise ValueError("channel_count must be an integer greater than 0")
+
 		Oscilloscope.__init__(self)
 		self._resource = None
+
+		self.channel = {}
+		for slot in range(1, 1 + channel_count):
+			self.channel[slot] = TektronixDPO7000Channel(self, slot)
 
 	def close(self):
 		if self._resource is not None:
