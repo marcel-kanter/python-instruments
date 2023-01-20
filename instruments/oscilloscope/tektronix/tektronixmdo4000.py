@@ -28,6 +28,15 @@ class TektronixMDO4000(Oscilloscope):
 		self._resource.write_termination = "\n"
 		self._resource.read_termination = "\n"
 
+	def query(self, s):
+		return self._resource.query(s)
+
+	def read(self):
+		return self._resource.read()
+
 	def reset(self):
 		self._resource.write("*CLS;*RST")
 		self._resource.query("*OPC?")
+
+	def write(self, s):
+		self._resource.write(s)

@@ -18,4 +18,13 @@ class InstrumentTestCase(unittest.TestCase):
 			examinee.reset()
 
 		with self.assertRaises(NotImplementedError):
+			examinee.read()
+
+		with self.assertRaises(NotImplementedError):
+			examinee.query("")
+
+		with self.assertRaises(NotImplementedError):
+			examinee.write("")
+
+		with self.assertRaises(NotImplementedError):
 			examinee.close()
