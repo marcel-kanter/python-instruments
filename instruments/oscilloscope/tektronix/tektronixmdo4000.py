@@ -1,5 +1,6 @@
 from ..oscilloscope import Oscilloscope
 from .tektronixmdo4000channel import TektronixMDO4000Channel
+from .tektronixmdo4000horizontal import TektronixMDO4000Horizontal
 
 
 class TektronixMDO4000(Oscilloscope):
@@ -13,6 +14,8 @@ class TektronixMDO4000(Oscilloscope):
 		self.channel = {}
 		for slot in range(1, 1 + channel_count):
 			self.channel[slot] = TektronixMDO4000Channel(self, slot)
+
+		self.horizontal = TektronixMDO4000Horizontal(self)
 
 	def close(self):
 		if self._resource is not None:
