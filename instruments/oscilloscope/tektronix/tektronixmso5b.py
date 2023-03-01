@@ -1,6 +1,7 @@
 from ..oscilloscope import Oscilloscope
 from .tektronixmso5bchannel import TektronixMSO5BChannel
 from .tektronixmso5bhorizontal import TektronixMSO5BHorizontal
+from .tektronixmso5btrigger import TektronixMSO5BTrigger
 
 
 class TektronixMSO5B(Oscilloscope):
@@ -16,6 +17,7 @@ class TektronixMSO5B(Oscilloscope):
 			self.channel[slot] = TektronixMSO5BChannel(self, slot)
 
 		self.horizontal = TektronixMSO5BHorizontal(self)
+		self.trigger = TektronixMSO5BTrigger(self)
 
 	def close(self):
 		if self._resource is not None:

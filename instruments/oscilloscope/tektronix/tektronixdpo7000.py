@@ -1,6 +1,7 @@
 from ..oscilloscope import Oscilloscope
 from .tektronixdpo7000channel import TektronixDPO7000Channel
 from .tektronixdpo7000horizontal import TektronixDPO7000Horizontal
+from .tektronixdpo7000trigger import TektronixDPO7000Trigger
 
 
 class TektronixDPO7000(Oscilloscope):
@@ -16,6 +17,7 @@ class TektronixDPO7000(Oscilloscope):
 			self.channel[slot] = TektronixDPO7000Channel(self, slot)
 
 		self.horizontal = TektronixDPO7000Horizontal(self)
+		self.trigger = TektronixDPO7000Trigger(self)
 
 	def close(self):
 		if self._resource is not None:
