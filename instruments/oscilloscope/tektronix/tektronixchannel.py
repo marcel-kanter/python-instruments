@@ -51,6 +51,14 @@ class TektronixChannel(object):
 		self.parent.write(f"CH{self.slot}:SCAL {v}")
 
 	@property
+	def state(self):
+		return self.parent.query(f"SEL:CH{self.slot}?")
+
+	@state.setter
+	def state(self, v):
+		self.parent.write(f"SEL:CH{self.slot} {v}") 
+
+	@property
 	def termination(self):
 		v = self.parent.query(f"CH{self.slot}:TER?")
 		return float(v)
