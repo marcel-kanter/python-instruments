@@ -1,6 +1,6 @@
 import unittest
 
-from instruments.functiongenerator.keysight.keysight33000boutput import Keysight33000BOutput
+from instruments.functiongenerator.keysight.keysight33000bsource import Keysight33000BSource
 from instruments.functiongenerator import FunctionGenerator
 
 
@@ -27,22 +27,20 @@ class Keysight33000BSourceTestCase(unittest.TestCase):
 		generator = MockFunctionGenerator()
 
 		with self.assertRaises(ValueError):
-			Keysight33000BOutput(generator, 0)
+			Keysight33000BSource(generator, 0)
 
-		Keysight33000BOutput(generator, 1)
+		Keysight33000BSource(generator, 1)
 
-	def test_load(self):
+	def test_function(self):
 		generator = MockFunctionGenerator()
 		channel = 2
-		examinee = Keysight33000BOutput(generator, channel)
+		examinee = Keysight33000BSource(generator, channel)
 
-		for load in (0, 10001):
-			with self.subTest("load=" + str(load)):
-				with self.assertRaises(ValueError):
-					examinee.load = load
+		with self.assertRaises(ValueError):
+			examinee.function = "X"
 
-		for load in (1, 50, 100, float("inf")):
-			with self.subTest("load=" + str(load)):
+		for f in ("SIN", "SINUSOID", "SQUARE", "SQU", "TRIANGLE", "TRI", "RAMP", "PULSE", "PRBS", "NOISE", "NOIS", "ARB", "DC"):
+			with self.subTest("f=" + str(f)):
 				generator.write_data = None
-				examinee.load = load
-				self.assertEqual(generator.write_data, "OUTP" + str(channel) + ":LOAD " + str(load))
+				examinee.function = f
+				self.assertEqual(generator.write_data, "SOUR" + str(channel) + ":FUNC " + f)
