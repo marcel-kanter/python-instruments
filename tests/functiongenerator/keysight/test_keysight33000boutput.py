@@ -1,6 +1,6 @@
 import unittest
 
-from instruments.functiongenerator.keysight.keysight33000bchannel import Keysight33000BChannel
+from instruments.functiongenerator.keysight.keysight33000boutput import Keysight33000BOutput
 from instruments.functiongenerator import FunctionGenerator
 
 
@@ -9,11 +9,11 @@ class MockFunctionGenerator(FunctionGenerator):
 		FunctionGenerator.__init__(self)
 
 
-class Keysight33000BChannelTestCase(unittest.TestCase):
+class Keysight33000BOutputTestCase(unittest.TestCase):
 	def test_creation(self):
 		generator = MockFunctionGenerator()
 
 		with self.assertRaises(ValueError):
-			Keysight33000BChannel(generator, 0)
+			Keysight33000BOutput(generator, 0)
 
-		Keysight33000BChannel(generator, 1)
+		Keysight33000BOutput(generator, 1)

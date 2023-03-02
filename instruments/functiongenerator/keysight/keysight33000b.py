@@ -1,5 +1,5 @@
 from ..functiongenerator import FunctionGenerator
-from .keysight33000bchannel import Keysight33000BChannel
+from .keysight33000boutput import Keysight33000BOutput
 
 
 class Keysight33000B(FunctionGenerator):
@@ -10,9 +10,9 @@ class Keysight33000B(FunctionGenerator):
 		FunctionGenerator.__init__(self)
 		self._resource = None
 
-		self.channel = {}
+		self.output = {}
 		for slot in range(1, 1 + channel_count):
-			self.channel[slot] = Keysight33000BChannel(self, slot)
+			self.output[slot] = Keysight33000BOutput(self, slot)
 
 	def close(self):
 		if self._resource is not None:

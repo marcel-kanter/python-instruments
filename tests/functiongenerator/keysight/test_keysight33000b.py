@@ -10,7 +10,7 @@ class Keysight33000BTestCase(unittest.TestCase):
 			Keysight33000B(0)
 
 		examinee = Keysight33000B(1)
-		channel1 = examinee.channel[1]
+		output1 = examinee.output[1]
 
 		with self.assertRaises(KeyError):
-			examinee.channel[2]
+			examinee.output[2]
