@@ -14,14 +14,6 @@ class TektronixChannel(object):
 	def coupling(self, v):
 		self.parent.write(f"CH{self.slot}:COUP {v}")
 
-	@property
-	def deskew(self):
-		v = self.parent.query(f"CH{self.slot}:DESK?")
-		return float(v)
-
-	@deskew.setter
-	def deskew(self, v):
-		self.parent.write(f"CH{self.slot}:DESK {v}")
 
 	@property
 	def offset(self):
@@ -49,6 +41,15 @@ class TektronixChannel(object):
 	@scale.setter
 	def scale(self, v):
 		self.parent.write(f"CH{self.slot}:SCAL {v}")
+
+	@property
+	def skew(self):
+		v = self.parent.query(f"CH{self.slot}:DESK?")
+		return float(v)
+
+	@skew.setter
+	def skew(self, v):
+		self.parent.write(f"CH{self.slot}:DESK {v}")
 
 	@property
 	def state(self):
