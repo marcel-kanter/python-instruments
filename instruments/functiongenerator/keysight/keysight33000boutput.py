@@ -20,3 +20,19 @@ class Keysight33000BOutput(object):
 			raise ValueError("l must be infinity or between 1 and 10000")
 
 		self.parent.write(f"OUTP{self.slot}:LOAD {l}")
+
+	@property
+	def mode(self):
+		return self.parent.query(f"OUTP{self.slot}:MODE?")
+
+	@mode.setter
+	def mode(self, v):
+		self.parent.write(f"OUTP{self.slot}:MODE {v}")
+
+	@property
+	def polarity(self):
+		return self.parent.query(f"OUTP{self.slot}:POL?")
+
+	@polarity.setter
+	def polarity(self, v):
+		self.parent.write(f"OUTP{self.slot}:POL {v}")
